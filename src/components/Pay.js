@@ -1,14 +1,11 @@
 import React from 'react';
+import Button from './core/Button'
 
 class Pay extends React.Component {
     render() {
         return(
           <div>
-             <button type="button" className="btn btn-primary" 
-                onClick={this.props.onClick}>
-                    Pay
-                {this.props.children}
-            </button>
+             pay
           </div>
 
         );

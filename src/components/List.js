@@ -1,18 +1,12 @@
 import React from 'react';
+import Button from './core/Button';
 
 
 class List extends React.Component {
     render() {
         return(
             <div>
-               <button type="button" className="btn btn-primary" 
-                onClick={this.props.onClick}>
-                    List
-                
-                {this.props.children}
-               
-            </button>
-               
+             List
             </div>
 
         );

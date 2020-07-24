@@ -6,73 +6,89 @@ import Add from './components/Add';
 import List from './components/List';
 import Pay from './components/Pay';
 class App extends React.Component {
+   constructor(props) {
+     super(props) 
+       this.state ={
+         activeTab: 'add',
+         items:[]
+       }
+       this.onClickTapAdd= this.onClickTapAdd.bind(this);
+       this.onClickTapList= this.onClickTapList.bind(this);
+       this.onClickTapPay= this.onClickTapPay.bind(this);
+       this.displayTappApp= this.displayTappAdd.bind(this);
+       this.displayTapList= this.displayTapList.bind(this);
+      //  this.displayTapPay= this.displayTapPay.bind(this);
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      activeTap: 'add',
-      items:[],
       
-
-
-      };
-    };
-  };
-  
-  
-  
-  render() {
-
-    return(
-      <div>
-        
-        <Button onClick={() =>{
-          console.log('it works')
-         
-        }}> 
-        
-        </Button>
-
+   }
+   onClickTapAdd() {
+    
+     this.setState({
+       activeTap: 'add',
        
+     })
+   };
+   
+   onClickTapList() {
+     this.setState({
+       activeTab: 'list',
+     })
+   };
 
-        <Add onClick={() =>{
-          this.setState({
-            activeTap: this.state.TabAdd,
-          });
-          console.log('it ')
-          
-          }}>  
-        </Add>
+   onClickTapPay() {
+     this.setState({
+       activeTab: 'pay'
+     });
+     
+   }
 
-        <List onClick={() =>{
-          this.setState({
-            activeTap: this.state.onClickTabList,
+   displayTappAdd() {
+    if (this.state.activeTab === 'add') {
+      return <Add />;
+     }
+   }
 
-          });
-          console.log('its working')
-          
-          }}>
-          
-          </List>
+   displayTapList() {
+    if (this.state.activeTab === 'list') {
+      return <List/>;
+     }
+   }
 
-         <Pay onClick={() =>{ 
-           this.setState({
-             activeTap: this.state.onClickTabPay,
-           });
-          console.log('it works')
+   
+  render() {
+    // if (this.state.activeTab === 'add') 
+    //   return <Add />;
+    console.log(this.state.activeTab)
+    
+    return(
+      
+        <div className="container-fluid">
+          <div className="row">
           
-           }}>
+
+          <Button onClick={this.onClickTapAdd} > Add </Button>
+          <Button onClick={this.onClickTapList} > List </Button>
+          <Button onClick={this.onClickTapPay} > Pay </Button>
+     
+         
+          </div>
+          <div> 
+            {this.displayTappAdd()}
+            {/* {this.displayTapPay()} */}
+            {this.displayTapList()}
+            <Pay/>
             
-
-         </Pay>
-        
+              
+          </div>
           
+  
+        </div>
         
-      </div>
 
-    );
-  };
-
+      );
+    
+  }
 };
 
 export default App;
+
