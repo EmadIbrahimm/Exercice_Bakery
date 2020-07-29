@@ -14,6 +14,7 @@ class Add extends React.Component {
           };
           this.handleChangeSlider= this.handleChangeSlider.bind(this);
           this.handleInput= this.handleInput.bind(this);
+          this.onSubmit= this.onSubmit.bind(this)
     }
     
 
@@ -28,19 +29,22 @@ class Add extends React.Component {
         this.setState({
             input: evt.target.value
         })
-    }
+    };
+    onSubmit() {
+        this.props.onAdd(this.state.price, this.state.input);
+        this.setState({ input: '' , price: 1 })
 
-
+      }
+      
     render() {
-        console.log(this.state.input)
         return(
             <div className="container-fluid">
                 <div className="input-group mb-3">
                 <form>
                   <label>
-                   <input type="text" placeholder='item' onChange={this.handleInput}/>
+                   <input type="text" placeholder='item' value={this.state.input} onChange={this.handleInput}/>
                  </label>
-                 <button className='btn btn-outline-primary' type='button' >
+                 <button className='btn btn-outline-primary' type='button' onClick={this.onSubmit}>
                    Add 
                  </button>
                  {/* onAdd={this.handleInput} */}

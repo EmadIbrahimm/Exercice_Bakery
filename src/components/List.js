@@ -6,8 +6,13 @@ class List extends React.Component {
     render() {
         return(
             <div>
-                
-             List
+                <ul> 
+                    {this.props.items.map((keys)=>{
+                        return (<li keys= {keys} > {keys.input} {keys.price} $ </li>
+                            );
+
+                    })}
+                </ul>
             </div>
 
         );

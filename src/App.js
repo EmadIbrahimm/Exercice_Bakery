@@ -18,7 +18,7 @@ class App extends React.Component {
        this.displayTappApp= this.displayTappAdd.bind(this);
        this.displayTapList= this.displayTapList.bind(this);
        this.displayTapPay= this.displayTapPay.bind(this);
-
+       this.onAdd= this.onAdd.bind(this);
       
    }
    onClickTapAdd() {
@@ -44,36 +44,44 @@ class App extends React.Component {
 
    displayTappAdd() {
     if (this.state.activeTab === 'add') {
-      return <Add onAdd={this.onAdd}/>;
+      return <Add onAdd={this.onAdd}/>; //step 2 : using the func onAdd
      }
-    //  return null
+     return null
    }
 
    displayTapList() {
     if (this.state.activeTab === 'list') {
-      return <List/>;
+      return <List items = {this.state.items}/>;
      }
+     return null;
    }
 
    displayTapPay() {
-    if (this.state.activeTab === 'pay') {
+    if (this.state.activeTab === 'pay') { 
       return <Pay/>;
      }
+     return null;
    }
-   onAdd(price, input) {
-     console.log(input, price)
+   onAdd(price, input) { // step 1 creating the function 
+    //  console.log(input, price)
+    const items = this.state.items;
+     items.push({
+       input,
+       price
+     });
 
+     this.setState({
+       items,
+       activeTab: 'list'
+     })
+     
    }
 
 
-   
   render() {
-    // if (this.state.activeTab === 'add') 
-    //   return <Add />;
+    
     console.log(this.state.activeTab)
-    // let {
-    //   activeTab
-    // } = isSelcted
+   
     return(
       
         <div className="container-fluid" mr-3 >
@@ -82,17 +90,16 @@ class App extends React.Component {
           <Button onClick={this.onClickTapAdd} isSelected={this.state.activeTab ==='add' ? true : false}> Add </Button>
           <Button onClick={this.onClickTapList} isSelected={this.state.activeTab ==='list' ? true : false}> List </Button>
           <Button onClick={this.onClickTapPay} isSelected={this.state.activeTab ==='pay' ? true : false}> Pay </Button>
-         
-         
-          </div>
-          <div> 
+          
+            </div>
+            <div>
             {this.displayTappAdd()}
             {this.displayTapPay()}
             {this.displayTapList()}
-            {/* <Pay/> */}
-            
-          </div>
+
+            </div>
         </div>
+        
       );
   }
 };
